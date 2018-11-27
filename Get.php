@@ -1,6 +1,6 @@
 <?php
 
-require_once 'system/Session.php';
+require_once 'Session.php';
 
 class Get {
 
@@ -11,7 +11,7 @@ class Get {
     }
 
     static function has($key) {
-        return isset($_GET[$key]) && !empty($_GET[$key]);
+        return isset($_GET[$key]); // && !empty($_GET[$key]);
     }
 
     static function get($key, $default = '') {
