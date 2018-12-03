@@ -41,22 +41,4 @@ class Get {
         self::$indirect = $_SESSION['GET'];
     }
 
-    static function eat($keys) {
-        if (!is_array($keys)) {
-            $keys = [$keys];
-        }
-        $count = 0;
-        foreach ($keys as $key) {
-            if (Get::has($key)) {
-                $value = Get::get($key);
-                Session::set($key, $value);
-                $count++;
-            }
-        }
-        if ($count > 0) {
-            header('Location: .');
-            exit;
-        }
-    }
-
 }

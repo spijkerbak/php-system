@@ -9,6 +9,29 @@ class Session {
         session_start();
     }
 
+    static function has($key) {
+        return isset($_SESSION[$key]);
+    }
+
+    static function get($key, $default = '') {
+        if (isset($_SESSION[$key])) {
+            $value = $_SESSION[$key];
+        } else {
+            $value = $default;
+        }
+        if (is_array($value)) {
+            return $value;
+        } else {
+            return trim($value);
+        }
+    }
+
+    static function eat($key, $default = '') {
+        $value = Session::get($key, $default);
+        Session::clear($key);
+        return $value;
+    }
+
     static function set($key, $value) {
         $_SESSION[$key] = $value;
     }
@@ -31,23 +54,6 @@ class Session {
             }
         }
         return $value;
-    }
-
-    static function has($key) {
-        return isset($_SESSION[$key]);
-    }
-
-    static function get($key, $default = '') {
-        if (isset($_SESSION[$key])) {
-            $value = $_SESSION[$key];
-        } else {
-            $value = $default;
-        }
-        if (is_array($value)) {
-            return $value;
-        } else {
-            return trim($value);
-        }
     }
 
     static function setFromFormIfSet($key) {
