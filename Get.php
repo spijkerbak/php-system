@@ -1,6 +1,6 @@
 <?php
 
-require_once 'system/Session.php';
+require_once 'Session.php';
 
 class Get {
 
