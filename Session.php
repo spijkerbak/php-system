@@ -59,7 +59,7 @@ class Session {
     static function setFromFormIfSet($key) {
         $value = filter_input(INPUT_POST, $key);
         if ($value === false || $value === null) {
-            $value = filter_input(INPUT_GET, $key);
+            $value = Get::get($key);
         }
         if ($value !== false && $value !== null) {
             if ($value == '') {
@@ -73,7 +73,7 @@ class Session {
     static function setFromForm($key) {
         $value = filter_input(INPUT_POST, $key);
         if ($value === false || $value === null) {
-            $value = filter_input(INPUT_GET, $key);
+            $value = Get::get($key);
         }
         if ($value !== false && $value !== null) {
             if ($value == '') {

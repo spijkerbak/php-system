@@ -9,6 +9,10 @@ class Get {
     function __construct() {
         // defined to avoid method get() to be seen as constructor
     }
+    
+    static function setFromSession() {
+        $_GET = Session::get('$_GET');
+    }
 
     static function has($key) {
         return isset($_GET[$key]) && !empty($_GET[$key]);
@@ -18,7 +22,13 @@ class Get {
         if (self::$indirect !== null) {
             $value = self::$indirect[$key];
         } else {
-            $value = filter_input(INPUT_GET, $key);
+            // filter_input does not work after setting $_GET
+            //$value = Get::get($key);
+            if(isset($_GET[$key])) {
+                $value = $_GET[$key];
+            } else {
+                $value = '';
+            }
         }
         if ($value === false || $value === null) {
             $value = '';
